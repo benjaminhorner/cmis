@@ -856,16 +856,15 @@ class CmisSession {
   String? _getRootFolderUrl([bool ignoreProxy = false]) {
     // Get the root folder URL for the selected repository
     dynamic repoInformation = jsonobject.JsonObjectLite<dynamic>();
-    if (!_repoInformation.containsKey(repositoryId)) {
+    if (!_repoInformation.containsKey(rootFolderId)) {
       throw CmisException('getRootFolderUrl() no repository information found');
     }
-    repoInformation = _repoInformation[repositoryId];
+    repoInformation = _repoInformation[rootFolderId];
     String? rootUrl;
     // Ignore the proxy check if we want the root url from the repository
-    rootUrl =
-        (!ignoreProxy) && proxy
-            ? _caterForProxyServer(repoInformation.rootFolderUrl)
-            : repoInformation.rootFolderUrl;
+    rootUrl = (!ignoreProxy) && proxy
+        ? _caterForProxyServer(repoInformation.rootFolderUrl)
+        : repoInformation.rootFolderUrl;
 
     return rootUrl;
   }
